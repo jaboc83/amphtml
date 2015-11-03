@@ -25,6 +25,7 @@ import {adreactor} from '../ads/adreactor';
 import {adsense} from '../ads/adsense';
 import {adtech} from '../ads/adtech';
 import {doubleclick} from '../ads/doubleclick';
+import {gist} from './gist';
 import {twitter} from './twitter';
 import {register, run} from '../src/3p';
 import {parseUrl} from '../src/url';
@@ -34,6 +35,7 @@ register('adreactor', adreactor);
 register('adsense', adsense);
 register('adtech', adtech);
 register('doubleclick', doubleclick);
+register('gist', gist);
 register('_ping_', function(win, data) {
   win.document.getElementById('c').textContent = data.ping;
 });
@@ -88,8 +90,8 @@ window.draw3p = function() {
   window.context.isMaster = window.context.master == window;
   window.context.data = data;
   window.context.noContentAvailable = triggerNoContentAvailable;
-  if (data.type == 'twitter') {
-    // Only make this available to Twitter for now while
+  if (data.type == 'twitter' || data.type == 'gist') {
+    // Only make this available to Twitter/Gist for now while
     // https://github.com/ampproject/amphtml/issues/728
     // is being implemented.
     window.context.updateDimensions = triggerDimensions;
